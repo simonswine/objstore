@@ -455,6 +455,11 @@ func WrapWithMetrics(b Bucket, reg prometheus.Registerer, name string) *metricBu
 		bkt.ops.WithLabelValues(op)
 		bkt.opsFailures.WithLabelValues(op)
 		bkt.opsDuration.WithLabelValues(op)
+	}
+	for _, op := range []string{
+		OpGet,
+		OpGetRange,
+	} {
 		bkt.opsFetchedBytes.WithLabelValues(op)
 	}
 	// fetched bytes only relevant for get and getrange
